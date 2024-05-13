@@ -1,0 +1,46 @@
+* {
+    font-family: 'Courier New', Courier, monospace
+}
+
+h1 {
+    font-weight: 900;
+}
+
+body {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    ;
+}
+
+.boxes {
+    display: flex;
+    justify-content: center;
+    width: 700px;
+    flex-wrap: wrap;
+}
+
+.box {
+    height: 200px;
+    width: 200px;
+    border: solid black 5px;
+    border-radius: 30px;
+    margin: 15px 15px;
+}
+
+#box0 {
+    background-color: rgb(180, 51, 73);
+}
+
+#box1 {
+    background-color: teal;
+}
+
+#box2 {
+    background-color: orange;
+}
+
+#box3 {
+    background-color: rgb(42, 64, 188);
+}
