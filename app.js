@@ -2,6 +2,10 @@ let body = document.querySelector("body");
 let boxes = document.querySelectorAll(".box");
 let mainBox = document.querySelector(".boxes");
 let isRunning = false;
+let level = 1;
+let seq = [];
+let count = 0;
+let infoLine = document.querySelector("h2");
 
 function boxBlink(box) {
     defaultColor = box.style.backgroundColor;
@@ -24,35 +28,40 @@ function randBoxBlink(boxColl) {
     return randno;
 }
 
-function startGame() {
-    let level = 1;
-    let seq = [];
-    seq.push(randBoxBlink(boxes));
-    let infoLine = document.querySelector("h2");
-    infoLine.innerText = `Level ${level}`;
-    let count = 0;
-    mainBox.addEventListener("click", function (event) {
-        if (event.target.id[3] == seq[count++]) {
-            console.log("right box")
-        } else {
-            function gameOver() {
-                bodyBlink(body);
-            };
-            let id = setInterval(gameOver, 200);
-            setTimeout(() => { clearInterval(id) }, 400);
-            infoLine.innerText = `Game Over! Your Score was ${level - 1}\nPress any Key to Restart the Game`;
-            count--;
-            isRunning = false;
-            seq = [];
-            level = 1;
-        }
+function clickHandler(event) {
+    if (event.target.id[3] == seq[count++]) {
+        console.log("right box")
+    } else {
+        function gameOver() {
+            bodyBlink(body);
+        };
+        let id = setInterval(gameOver, 200);
+        setTimeout(() => { clearInterval(id) }, 400);
+        infoLine.innerText = `Game Over! Your Score was ${level - 1}\nPress any Key to Restart the Game`;
+        console.log("HERES THE BUG");
+        count--;
+        resetGame();
+    }
 
-        if (count == seq.length) {
-            infoLine.innerText = `Level ${++level}`;
-            seq.push(randBoxBlink(boxes));
-            count = 0;
-        }
-    })
+    if (count == seq.length && isRunning) {
+        infoLine.innerText = `Level ${++level}`;
+        seq.push(randBoxBlink(boxes));
+        count = 0;
+    }
+}
+
+function resetGame() {
+    isRunning = false;
+    seq = [];
+    level = 1;
+    count = 0;
+    mainBox.removeEventListener("click", clickHandler);
+}
+
+function startGame() {
+    seq.push(randBoxBlink(boxes));
+    infoLine.innerText = `Level ${level}`;
+    mainBox.addEventListener("click", clickHandler);
 }
 
 body.addEventListener("keypress", () => {
