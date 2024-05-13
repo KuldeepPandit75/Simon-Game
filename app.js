@@ -9,9 +9,16 @@ let infoLine = document.querySelector("h2");
 
 function boxBlink(box) {
     defaultColor = box.style.backgroundColor;
-    box.style.backgroundColor = "white";
+    box.style.backgroundColor = "black";
     setTimeout(() => {
         box.style.backgroundColor = defaultColor;
+    }, 100)
+}
+function boxClick(box) {
+    defaultOpacity = box.style.opacity;
+    box.style.opacity = 0.8;
+    setTimeout(() => {
+        box.style.opacity = defaultColor;
     }, 100)
 }
 function bodyBlink(body) {
@@ -29,6 +36,7 @@ function randBoxBlink(boxColl) {
 }
 
 function clickHandler(event) {
+    boxClick(event.target);
     if (event.target.id[3] == seq[count++]) {
         console.log("right box")
     } else {
