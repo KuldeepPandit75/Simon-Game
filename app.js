@@ -7,6 +7,7 @@ let seq = [];
 let count = 0;
 let infoLine = document.querySelector("h2");
 let isAndroid = false;
+let isRestart = false;
 
 function boxBlink(box) {
     defaultColor = box.style.backgroundColor;
@@ -61,6 +62,8 @@ function clickHandler(event) {
 
 function resetGame() {
     isRunning = false;
+    isAndroid = false;
+    isRestart = true;
     seq = [];
     level = 1;
     count = 0;
@@ -89,7 +92,7 @@ body.addEventListener("keypress", () => {
 })
 body.addEventListener("touchstart", () => {
     isAndroid = true;
-    if (!isRunning) {
+    if (!isRunning && !isRestart) {
         isRunning = true;
         startGame();
     }
