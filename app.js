@@ -6,6 +6,7 @@ let level = 1;
 let seq = [];
 let count = 0;
 let infoLine = document.querySelector("h2");
+let isAndroid = false;
 
 function boxBlink(box) {
     defaultColor = box.style.backgroundColor;
@@ -69,10 +70,21 @@ function resetGame() {
 function startGame() {
     seq.push(randBoxBlink(boxes));
     infoLine.innerText = `Level ${level}`;
-    mainBox.addEventListener("click", clickHandler);
+    if (!isAndroid) {
+        mainBox.addEventListener("click", clickHandler);
+    } else {
+        mainBox.addEventListener("touchstart", clickHandler);
+    }
 }
 
 body.addEventListener("keypress", () => {
+    if (!isRunning) {
+        isRunning = true;
+        startGame();
+    }
+})
+body.addEventListener("touchstart", () => {
+    isAndroid = true;
     if (!isRunning) {
         isRunning = true;
         startGame();
