@@ -64,7 +64,11 @@ function resetGame() {
     seq = [];
     level = 1;
     count = 0;
-    mainBox.removeEventListener("click", clickHandler);
+    if (!isAndroid) {
+        mainBox.removeEventListener("click", clickHandler);
+    } else {
+        mainBox.removeEventListener("touchstart", clickHandler);
+    }
 }
 
 function startGame() {

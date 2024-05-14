@@ -44,3 +44,23 @@ body {
 #box3 {
     background-color: rgb(42, 64, 188);
 }
+
+@media screen and (max-width: 600px) {
+    .box {
+        height: 30vw;
+        width: 30vw;
+    }
+
+    .boxes {
+        width: 90%;
+    }
+
+    .box {
+        height: 20vw;
+        width: 20vw;
+    }
+
+    video {
+        width: 100%;
+    }
+}
